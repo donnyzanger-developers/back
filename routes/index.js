@@ -3,6 +3,7 @@ var router = express.Router();
 const userRoutes = require('./userRoutes');
 const functions = require('../common/functions');
 const {OAuth2Client} = require('google-auth-library');
+const checks = require('../middleware/checks');
 
 require('dotenv').config();
 
@@ -128,7 +129,7 @@ router.post('/tokensignin', async (req, res) => {
     };
 });
 
-router.get('user_paid', async (req, res) => {
+router.get('user_paid', async (req, res) => { // not using put / in front if using
     const googleToken = req.header('Authorization');
     const email = await functions.verify(googleToken);
     const user = await functions.user(email);
@@ -146,13 +147,11 @@ router.get('/user_admin', async (req, res) => {
         res.status(400).send(false);
 });
   
-// Webhook handler for asynchronous events.
 router.post('/webhook', async (req, res) => {
     let data;
     let eventType;
-    // Check if webhook signing is configured.
+   
     if (process.env.STRIPE_WEBHOOK_SECRET) {
-        // Retrieve the event by verifying the signature using the raw body and secret.
         let event;
         let signature = req.headers['stripe-signature'];
 
@@ -166,12 +165,9 @@ router.post('/webhook', async (req, res) => {
         console.log(`⚠️  Webhook signature verification failed.`);
         return res.sendStatus(400);
         }
-        // Extract the object from the event.
         data = event.data;
         eventType = event.type;
     } else {
-        // Webhook signing is recommended, but if the secret is not configured in `config.js`,
-        // retrieve the event data directly from the request body.
         data = req.body.data;
         eventType = req.body.type;
     }
@@ -183,6 +179,7 @@ router.post('/webhook', async (req, res) => {
     res.sendStatus(200);
 });
 
-router.use('/users', userRoutes);
+router.use('/admin/users', checks.user_admin, userRoutes);
+// router.use('/users', checks.verify, userRoutes);
 
 module.exports = router;
