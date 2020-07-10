@@ -179,7 +179,11 @@ router.post('/webhook', async (req, res) => {
     res.sendStatus(200);
 });
 
-router.use('/admin/users', checks.user_admin, userRoutes);
+router.get('/admin/users', checks.user_admin, userRoutes);
 // router.use('/users', checks.verify, userRoutes);
+
+// router.all('/*', (req, res) => {
+//     res.status(400).send('are you supposed to be here?');
+// })
 
 module.exports = router;
