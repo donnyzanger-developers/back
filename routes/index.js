@@ -80,6 +80,32 @@ router.post('/create-checkout-session', async (req, res) => {
     });
 });
 
+router.post('/image_to_pdf', async (req, res) => {
+    try {
+        if (req.files.length > 0 && (req.files[0].originalname.endsWith('.jpg') || req.files[0].originalname.endsWith('.jpeg'))) {
+            await functions.imageToPdf(req.files[0])
+            await res.download('./users/1/files/pdf2jpg2pdf.pdf')
+        } else {
+            res.status(400).send()
+        }
+    } catch(err) {
+        res.status(500).send()
+    } 
+});
+
+router.post('/pdf_to_image', async (req, res) => {
+    try {
+        if (req.files.length > 0  && (req.files[0].originalname.endsWith('.pdf'))) {
+            await functions.pdfToImage(req.files[0])
+            await res.download('./users/1/files/pdf2jpg2pdf_1.jpeg')
+        } else {
+            res.status(400).send()
+        }
+    } catch(err) {
+        res.status(500).send()
+    }
+});
+
 router.post('/paid', async (req, res) => {
     var googleToken = req.header('Authorization');
     const email = await functions.verify(googleToken)
