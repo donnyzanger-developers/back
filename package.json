@@ -6,7 +6,8 @@
     "node": "12.17.0"
   },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www", 
+    "seed": "node ./scripts/seed.js"
   },
   "dependencies": {
     "cookie-parser": "1.4.4",

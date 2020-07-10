@@ -8,7 +8,11 @@ var userSchema = new Schema({
         unique: true
     }, 
 	paid: {
-        type: Boolean,
+        type: Boolean, 
+        default: false
+    }, 
+    admin: {
+        type: Boolean, 
         default: false
     }, 
 	created: {

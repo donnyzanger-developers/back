@@ -135,6 +135,16 @@ router.get('user_paid', async (req, res) => {
 
     res.status(200).send(user.paid)
 });
+
+router.get('/user_admin', async (req, res) => {
+    const googleToken = req.header('Authorization');
+    const email = await functions.verify(googleToken);
+    const user = await functions.user(email);
+    if (user && user.admin)
+        res.status(200).send(true);
+    else
+        res.status(400).send(false);
+});
   
 // Webhook handler for asynchronous events.
 router.post('/webhook', async (req, res) => {
