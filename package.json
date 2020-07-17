@@ -6,7 +6,7 @@
     "node": "12.17.0"
   },
   "scripts": {
-    "start": "node ./bin/www", 
+    "start": "node ./bin/www",
     "seed": "node ./scripts/seed.js"
   },
   "dependencies": {
@@ -16,14 +16,15 @@
     "dotenv": "8.2.0",
     "express": "4.16.4",
     "express-mongoose-generator": "3.0.3",
+    "express-multipart-file-parser": "0.1.2",
     "google-auth-library": "6.0.3",
     "http-errors": "1.6.3",
+    "images-to-pdf": "1.0.3",
     "jade": "1.11.0",
     "mongoose": "5.9.22",
     "morgan": "1.9.1",
-    "stripe": "8.69.0",
-    "images-to-pdf": "1.0.3",
     "pdf2pic": "1.4.0",
-    "express-multipart-file-parser": "0.1.2"
+    "puppeteer": "^5.2.0",
+    "stripe": "8.69.0"
   }
 }

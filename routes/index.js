@@ -4,6 +4,7 @@ const userRoutes = require('./userRoutes');
 const functions = require('../common/functions');
 const {OAuth2Client} = require('google-auth-library');
 const checks = require('../middleware/checks');
+const puppeteer = require('puppeteer');
 
 require('dotenv').config();
 
@@ -79,6 +80,22 @@ router.post('/create-checkout-session', async (req, res) => {
     res.send({
         sessionId: session.id,
     });
+});
+
+router.post('/html_to_pdf', async (req, res) => {
+    try {
+        const website = req.body.website;
+        await (async () => {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto(website, {waitUntil: 'networkidle2'});
+            await page.pdf({path: './users/1/files/pdfsync.pdf', format: 'A4'});
+            await browser.close();
+            await res.download('./users/1/files/pdfsync.pdf')
+        })();
+    } catch(err) {
+        res.status(500).send()
+    }
 });
 
 router.post('/image_to_pdf', async (req, res) => {

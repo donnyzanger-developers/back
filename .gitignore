@@ -118,3 +118,5 @@ dist
 # others
 .vscode/
 users/1/files/*
+!users/1/files/.keep
+*.DS_Store
