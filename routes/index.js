@@ -94,6 +94,7 @@ router.post('/html_to_pdf', async (req, res) => {
             await res.download('./users/1/files/pdfsync.pdf')
         })();
     } catch(err) {
+        console.log(err)
         res.status(500).send()
     }
 });
