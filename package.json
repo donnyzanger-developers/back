@@ -24,7 +24,7 @@
     "mongoose": "5.9.22",
     "morgan": "1.9.1",
     "pdf2pic": "1.4.0",
-    "puppeteer": "^5.2.0",
+    "puppeteer": "5.2.0",
     "stripe": "8.69.0"
   }
 }
