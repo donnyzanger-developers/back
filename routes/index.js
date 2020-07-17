@@ -86,7 +86,7 @@ router.post('/html_to_pdf', async (req, res) => {
     try {
         const website = req.body.website;
         await (async () => {
-            const browser = await puppeteer.launch({args: ['--no-sandbox']});
+            const browser = await puppeteer.launch();
             const page = await browser.newPage();
             await page.goto(website, {waitUntil: 'networkidle2'});
             await page.pdf({path: './users/1/files/pdfsync.pdf', format: 'A4'});
