@@ -34,10 +34,6 @@ server.on('listening', onListening);
 
 
 mongoose.connect(process.env.DB_HOST, {
-    auth: {
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-    },
     useUnifiedTopology: true, 
     useNewUrlParser: true
 });

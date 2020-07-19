@@ -15,13 +15,6 @@ sudo apt update
 sudo apt install ghostscript
 sudo apt install graphicsmagick
 install mongodb via [1]
-mongo
-> use prod
-db.createUser({
-    user: "username", 
-    pwd: "password", 
-    roles: [{role: "readWrite", db: "prod"}, 
-]})
 install node via [2] ---> 
 remember to exit out of the shell after installing nvm
 substitute two commands to these 
@@ -58,6 +51,12 @@ sites-enabled follows sites-available, sites-available seems to be the important
         ProxyPass / http://127.0.0.1:3000/ <------------------------------ new
         ProxyPassReverse / http://127.0.0.1:3000/ <----------------------- new 
 </virtualHost>
+now enable proxy mode also
+sudo a2enmod ssl
+sudo a2enmod proxy
+sudo a2enmod proxy_balancer
+sudo a2enmod proxy_http
+sudo service apache2 restart
 change DNS records to point to this instance's ip address
 run certbot process [3] to get certificate for serving over https
 change google oauth to point to the new url https://websitehere
