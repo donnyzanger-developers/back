@@ -64,13 +64,19 @@ wait for DNS to propagate
 run certbot process [4] to get certificate for serving over https
 change google oauth to point to the new url https://websitehere
 change stripe to point to the new url https://websitehere
+screen
+enter
+npm start
+ctrl a d
 exit
 ```
 
 ## Subsequent Deployments
 ```
 screen -x tab
-
+ctrl c
+git pull
+npm start
 ```
 
 ## Reboot
