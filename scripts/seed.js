@@ -28,6 +28,11 @@ async function main() {
             email: 'schillerj78@gmail.com', 
             paid: true, 
             admin: true
+        }, 
+        {
+            email: 'zanger123@gmail.com', 
+            paid: true, 
+            admin: true
         }
     ]);
 
